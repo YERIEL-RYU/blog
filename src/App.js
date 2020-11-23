@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import PostListPage from './pages/PostListPage';
+import PostPage from './pages/PostPage';
+import RegisterPage from './pages/RegisterPage';
+import WritePage from './pages/WritePage';
+import MainTemplate from './components/Template/MainTemplate';
+import Test from './components/test';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route component={LoginPage} path="/login" />
+      <Route component={RegisterPage} path="/register" />
+      <MainTemplate>
+        <Route component={PostListPage} path={['/@:username', '/']} exact />
+        <Route component={WritePage} path="/write" />
+        <Route component={PostPage} path="/@:username/:postId" />
+        <Route component={Test} path="/test" />
+      </MainTemplate>
+    </Switch>
   );
-}
+};
 
 export default App;
